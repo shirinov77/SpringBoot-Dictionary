@@ -1,219 +1,362 @@
-/* CSS Variables */
-:root {
-    --primary-color: #4361ee;
-    --secondary-color: #3f37c9;
-    --accent-color: #4895ef;
-    --danger-color: #f72585;
-    --light-color: #f8f9fa;
-    --dark-color: #212529;
-    --gray-color: #6c757d;
-    --border-color: #dee2e6;
-    --success-color: #4cc9f0;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
-
-/* Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* General Styles */
 body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: var(--dark-color);
-    background-color: #f5f7fa;
-    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #0a0a0a; /* Qop-qora fon */
     margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    color: #fff; /* Matnlar uchun oq rang */
+}
+
+/* Yulduzlar uchun fon */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 3s infinite ease-in-out;
+    opacity: 0.8;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
 }
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    width: 100%;
+    background: rgba(30, 30, 30, 0.95); /* Qoramtir shaffof konteyner */
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    margin: 20px auto;
+    position: relative;
+    animation: slideIn 0.5s ease-out;
+    z-index: 1;
 }
 
-h1 {
-    color: var(--primary-color);
-    margin-bottom: 24px;
-    font-weight: 700;
+/* Slide-in Animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.app-title {
     text-align: center;
-    font-size: 2.5rem;
+    color: #60a5fa; /* Yulduzli fon bilan mos rang */
+    font-size: 2.2rem; /* Yozuv hajmi kichraytirildi */
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Search Form Styles */
+.app-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: #60a5fa;
+    transition: width 0.4s ease, left 0.4s ease;
+}
+
+.app-title:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Search Form */
 .search-form {
     display: flex;
+    justify-content: center;
     margin-bottom: 30px;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
 }
 
-.search-form input {
+.search-input {
     flex: 1;
-    padding: 12px 16px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px 0 0 4px;
-    font-size: 16px;
-    transition: var(--transition);
-}
-
-.search-form input:focus {
+    padding: 12px 18px; /* Padding biroz kichraytirildi */
+    font-size: 1rem; /* Yozuv hajmi moslashtirildi */
+    border: 2px solid transparent;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
     outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.search-form button {
-    padding: 12px 20px;
-    background-color: var(--primary-color);
-    color: white;
+.search-input::placeholder {
+    color: #a1a1aa;
+}
+
+.search-input:focus {
+    border-color: #60a5fa;
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
+}
+
+.search-btn {
+    padding: 12px 25px; /* Tugma o'lchami biroz kichraytirildi */
+    background: linear-gradient(45deg, #3498db, #60a5fa);
+    color: #fff;
     border: none;
-    border-radius: 0 4px 4px 0;
+    border-radius: 30px;
     cursor: pointer;
-    font-size: 16px;
-    transition: var(--transition);
-}
-
-.search-form button:hover {
-    background-color: var(--secondary-color);
-}
-
-/* Add New Word Button */
-.add-new-btn {
-    display: inline-block;
-    margin-bottom: 25px;
-    padding: 10px 16px;
-    background-color: var(--success-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
+    font-size: 0.95rem; /* Yozuv hajmi moslashtirildi */
     font-weight: 500;
-    transition: var(--transition);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.search-btn:hover {
+    background: linear-gradient(45deg, #2980b9, #4b8bf5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+}
+
+/* Add New Button */
+.add-new-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px; /* Tugma o'lchami kichraytirildi */
+    background: linear-gradient(45deg, #2ecc71, #4ade80);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 500;
+    font-size: 0.95rem; /* Yozuv hajmi moslashtirildi */
+    transition: all 0.3s ease;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
 }
 
 .add-new-btn:hover {
-    background-color: #3aa8d8;
+    background: linear-gradient(45deg, #27ae60, #22c55e);
     transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
-.add-new-btn i {
-    margin-right: 8px;
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background-color: var(--border-color);
-    margin: 20px 0;
+    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.6);
 }
 
 /* Table Styles */
 .table-container {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    margin-bottom: 30px;
+    overflow-x: auto;
+    border-radius: 15px;
+    background: rgba(30, 30, 30, 0.95);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    background: transparent;
 }
 
 th, td {
-    padding: 16px;
+    padding: 14px; /* Padding kichraytirildi */
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #374151;
+    transition: background 0.3s ease;
 }
 
 th {
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: 500;
+    background: linear-gradient(45deg, #3498db, #60a5fa);
+    color: #fff;
     text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
+    font-size: 0.9rem; /* Yozuv hajmi to'g'rlandi */
+    letter-spacing: 1.2px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-tr:nth-child(even) {
-    background-color: rgba(248, 249, 250, 0.5);
+td {
+    color: #d1d5db;
+    font-weight: 400;
+    font-size: 0.85rem; /* Jadval yozuvlari kichraytirildi */
 }
 
-tr:hover {
-    background-color: rgba(72, 149, 239, 0.05);
+tr:hover td {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .action-btn {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 4px;
+    padding: 8px 16px; /* Tugma o'lchami kichraytirildi */
     text-decoration: none;
-    font-size: 0.9rem;
-    margin-right: 8px;
-    transition: var(--transition);
+    border-radius: 8px;
+    font-size: 0.85rem; /* Yozuv hajmi moslashtirildi */
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .edit-btn {
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    background: linear-gradient(45deg, #f1c40f, #facc15);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(241, 196, 15, 0.4);
 }
 
 .edit-btn:hover {
-    background-color: var(--primary-color);
-    color: white;
+    background: linear-gradient(45deg, #e1b12c, #eab308);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(241, 196, 15, 0.6);
 }
 
 .delete-btn {
-    color: var(--danger-color);
-    border: 1px solid var(--danger-color);
+    background: linear-gradient(45deg, #e74c3c, #f87171);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
 }
 
 .delete-btn:hover {
-    background-color: var(--danger-color);
-    color: white;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .table-container {
-        overflow-x: auto;
-    }
-
-    table {
-        min-width: 600px;
-    }
-
-    .search-form {
-        flex-direction: column;
-    }
-
-    .search-form input {
-        border-radius: 4px;
-        margin-bottom: 10px;
-    }
-
-    .search-form button {
-        border-radius: 4px;
-        width: 100%;
-    }
+    background: linear-gradient(45deg, #c0392b, #dc2626);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(231, 76, 60, 0.6);
 }
 
 /* Empty State */
 .empty-state {
     text-align: center;
     padding: 40px;
-    color: var(--gray-color);
+    color: #9ca3af;
+    animation: fadeIn 1s ease-in;
 }
 
 .empty-state i {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: var(--border-color);
+    font-size: 3rem; /* Ikonka hajmi kichraytirildi */
+    margin-bottom: 12px;
+    color: #60a5fa;
+    transition: transform 0.3s ease;
+}
+
+.empty-state i:hover {
+    transform: scale(1.2);
+}
+
+.empty-state h3 {
+    margin: 12px 0;
+    font-size: 1.5rem; /* Yozuv hajmi kichraytirildi */
+    color: #60a5fa;
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 1rem; /* Yozuv hajmi moslashtirildi */
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .app-title {
+        font-size: 1.8rem; /* Mobil uchun kichraytirildi */
+    }
+
+    .search-wrapper {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .search-input,
+    .search-btn {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+
+    table {
+        font-size: 0.8rem; /* Jadval yozuvlari kichraytirildi */
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .action-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-title {
+        font-size: 1.6rem;
+    }
+
+    .search-input {
+        padding: 10px;
+    }
+
+    .search-btn, .add-new-btn {
+        padding: 8px 16px;
+    }
+
+    .empty-state i {
+        font-size: 2.2rem;
+    }
+
+    .empty-state h3 {
+        font-size: 1.3rem;
+    }
+
+    .empty-state p {
+        font-size: 0.9rem;
+    }
 }

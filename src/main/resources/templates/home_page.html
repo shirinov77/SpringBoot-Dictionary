@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Dictionary App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/home_page.css}">
 </head>
 <body>
+<div class="stars"></div> <!-- Yulduzlar uchun konteyner -->
 <div class="container">
     <h1 class="app-title">📖 Dictionary</h1>
 
@@ -40,11 +42,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="dict : ${dictionaries}">
+            <!-- So'zlar mavjud bo'lsa -->
+            <tr th:each="dict : ${dictionaries}" th:if="${dictionaries != null and !dictionaries.isEmpty()}">
                 <td th:text="${dict.id}"></td>
                 <td th:text="${dict.word}"></td>
                 <td th:text="${dict.meaning}"></td>
-                <td th:text="${dict.createdAt}"></td>
+                <!-- Sana to'g'ri maydonga moslashtirildi va formatlandi -->
+                <td th:text="${dict.createDate != null ? #temporals.format(dict.createDate, 'yyyy-MM-dd HH:mm') : '—'}"></td>
                 <td class="action-buttons">
                     <a class="action-btn edit-btn" th:href="@{'/dictionary/edit/' + ${dict.id}}">
                         <i class="fas fa-edit"></i> Tahrirlash
@@ -55,7 +59,9 @@
                     </a>
                 </td>
             </tr>
-            <tr th:unless="${not dictionaries.empty}">
+
+            <!-- So'zlar bo'lmasa -->
+            <tr th:if="${dictionaries == null or dictionaries.isEmpty()}">
                 <td colspan="5" class="empty-state">
                     <i class="fas fa-book-open"></i>
                     <h3>Hech qanday so'z topilmadi</h3>
@@ -68,8 +74,26 @@
 </div>
 
 <script>
-    // Oddiy JavaScript bilan search inputga fokus qilish
-    document.querySelector('.search-input').focus();
+    // Yulduzlar generatsiyasi
+    function createStars() {
+        const starsContainer = document.querySelector('.stars');
+        const numStars = 100; // Yulduzlar soni
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            starsContainer.appendChild(star);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        createStars();
+        document.querySelector('.search-input').focus();
+    });
 </script>
 </body>
 </html>
