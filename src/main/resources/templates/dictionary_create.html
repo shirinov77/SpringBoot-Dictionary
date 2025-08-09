@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Word</title>
+</head>
+<body>
+<h1>Add New Word</h1>
+
+<form th:action="@{/dictionary/create}" method="post" th:object="${dictionary}">
+    <label>Word:</label>
+    <input type="text" th:field="*{word}" required>
+    <br><br>
+    <label>Meaning:</label>
+    <textarea th:field="*{meaning}" required></textarea>
+    <br><br>
+    <button type="submit">Save</button>
+</form>
+
+<br>
+<a th:href="@{/}">Back to Home</a>
+
+</body>
+</html>
