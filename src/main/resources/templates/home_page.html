@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dictionary App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/home_page.css}">
+</head>
+<body>
+<div class="stars"></div> <!-- Yulduzlar uchun konteyner -->
+<div class="container">
+    <h1 class="app-title">📖 Dictionary</h1>
+
+    <!-- Search form -->
+    <form class="search-form" th:action="@{/}" method="get">
+        <div class="search-wrapper">
+            <input type="text" name="search" placeholder="So'z izlash..." th:value="${search}" class="search-input">
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i> Izlash
+            </button>
+        </div>
+    </form>
+
+    <!-- Add new word button -->
+    <a class="add-new-btn" th:href="@{/dictionary/create}">
+        <i class="fas fa-plus"></i> Yangi so'z qo'shish
+    </a>
+
+    <!-- Dictionary table -->
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>So'z</th>
+                <th>Ma'nosi</th>
+                <th>Yaratilgan sana</th>
+                <th>Amallar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- So'zlar mavjud bo'lsa -->
+            <tr th:each="dict : ${dictionaries}" th:if="${dictionaries != null and !dictionaries.isEmpty()}">
+                <td th:text="${dict.id}"></td>
+                <td th:text="${dict.word}"></td>
+                <td th:text="${dict.meaning}"></td>
+                <!-- Sana to'g'ri maydonga moslashtirildi va formatlandi -->
+                <td th:text="${dict.createDate != null ? #temporals.format(dict.createDate, 'yyyy-MM-dd HH:mm') : '—'}"></td>
+                <td class="action-buttons">
+                    <a class="action-btn edit-btn" th:href="@{'/dictionary/edit/' + ${dict.id}}">
+                        <i class="fas fa-edit"></i> Tahrirlash
+                    </a>
+                    <a class="action-btn delete-btn" th:href="@{'/dictionary/delete/' + ${dict.id}}"
+                       onclick="return confirm('Bu so\'zni o\'chirishni xohlaysizmi?');">
+                        <i class="fas fa-trash"></i> O'chirish
+                    </a>
+                </td>
+            </tr>
+
+            <!-- So'zlar bo'lmasa -->
+            <tr th:if="${dictionaries == null or dictionaries.isEmpty()}">
+                <td colspan="5" class="empty-state">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Hech qanday so'z topilmadi</h3>
+                    <p>Boshlash uchun birinchi so'zingizni qo'shing!</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Yulduzlar generatsiyasi
+    function createStars() {
+        const starsContainer = document.querySelector('.stars');
+        const numStars = 100; // Yulduzlar soni
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            starsContainer.appendChild(star);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        createStars();
+        document.querySelector('.search-input').focus();
+    });
+</script>
+</body>
+</html>

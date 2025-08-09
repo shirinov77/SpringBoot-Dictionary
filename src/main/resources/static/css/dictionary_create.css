@@ -1,0 +1,235 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0a0a0a; /* Qop-qora fon */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    color: #fff; /* Matnlar uchun oq rang */
+}
+
+/* Yulduzlar uchun fon */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 3s infinite ease-in-out;
+    opacity: 0.8;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.container {
+    max-width: 800px; /* Forma uchun kichikroq konteyner */
+    width: 100%;
+    background: rgba(30, 30, 30, 0.95); /* Qoramtir shaffof konteyner */
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    margin: 20px auto;
+    position: relative;
+    animation: slideIn 0.5s ease-out;
+    z-index: 1;
+}
+
+/* Slide-in Animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.app-title {
+    text-align: center;
+    color: #60a5fa; /* Yulduzli fon bilan mos rang */
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.app-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: #60a5fa;
+    transition: width 0.4s ease, left 0.4s ease;
+}
+
+.app-title:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Add Word Form */
+.add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 1rem;
+    color: #d1d5db;
+    font-weight: 500;
+}
+
+.form-input, .form-textarea {
+    padding: 12px 18px;
+    font-size: 1rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-input::placeholder, .form-textarea::placeholder {
+    color: #a1a1aa;
+}
+
+.form-input:focus, .form-textarea:focus {
+    border-color: #60a5fa;
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
+}
+
+.error-message {
+    color: #f87171;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.save-btn {
+    background: linear-gradient(45deg, #2ecc71, #4ade80);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
+}
+
+.save-btn:hover {
+    background: linear-gradient(45deg, #27ae60, #22c55e);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(46, 204, 113, 0.6);
+}
+
+.back-btn {
+    background: linear-gradient(45deg, #6b7280, #9ca3af);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(107, 114, 128, 0.4);
+}
+
+.back-btn:hover {
+    background: linear-gradient(45deg, #4b5563, #6b7280);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(107, 114, 128, 0.6);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .app-title {
+        font-size: 1.8rem;
+    }
+
+    .add-form {
+        gap: 15px;
+    }
+
+    .form-input, .form-textarea {
+        font-size: 0.95rem;
+    }
+
+    .action-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-title {
+        font-size: 1.6rem;
+    }
+
+    .form-input, .form-textarea {
+        padding: 10px;
+    }
+
+    .action-btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+}
