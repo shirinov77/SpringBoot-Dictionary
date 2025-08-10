@@ -52,12 +52,16 @@ Dastur orqali foydalanuvchi so‘zlarni qidirishi, qo‘shishi, tahrirlashi va o
 │   ├── 📄 dictionary_create.html     ← Yangi so‘z qo‘shish formasi
 │   └── 📄 dictionary_update.html     ← So‘zni tahrirlash formasi
 │
+├── 📂 static  (Style kodlari)
+│   ├── 📄 home_page.css  
+│   ├── 📄 dictionary_create.css 
+│   └── 📄 dictionary_update.css
+│
+│
 ├── 📂 db
 │   └── 📂 postgresql
 │       ├── 📄 schema-postgresql.sql  ← Jadval yaratish SQL
 │       └── 📄 data-postgresql.sql    ← Test ma’lumotlar
 │
-├── 📄 application.properties         ← Umumiy konfiguratsiya
-├── 📄 application-dev.properties     ← Dev uchun konfiguratsiya
-├── 📄 application-prod.properties    ← Prod uchun konfiguratsiya
-└── 📄 application-test.properties    ← Test uchun konfiguratsiya
+└── 📄 application.properties         ← Umumiy konfiguratsiya
+
