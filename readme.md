@@ -7,7 +7,7 @@ Dastur orqali foydalanuvchi so‘zlarni qidirishi, qo‘shishi, tahrirlashi va o
 
 ## 🚀 Texnologiyalar
 - Java 17+
-- Spring Boot (Spring Data JPA)
+- Spring Boot (Spring JDBC)
 - PostgreSQL
 - Thymeleaf
 - HTML/CSS
