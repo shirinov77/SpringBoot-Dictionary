@@ -57,7 +57,6 @@ Dastur orqali foydalanuvchi so‘zlarni qidirishi, qo‘shishi, tahrirlashi va o
 │   ├── 📄 dictionary_create.css 
 │   └── 📄 dictionary_update.css
 │
-│
 ├── 📂 db
 │   └── 📂 postgresql
 │       ├── 📄 schema-postgresql.sql  ← Jadval yaratish SQL
