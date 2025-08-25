@@ -15,7 +15,6 @@ public class DictionaryController {
         this.dictionaryService = dictionaryService;
     }
 
-    // Home page + search
     @GetMapping("/")
     public String homePage(@RequestParam(value = "search", required = false) String search, Model model) {
         if (search != null && !search.isEmpty()) {
@@ -28,7 +27,6 @@ public class DictionaryController {
         return "home_page";
     }
 
-    // Create page
     @GetMapping("/dictionary/create")
     public String createPage(Model model) {
         model.addAttribute("dictionary", new Dictionary());
@@ -41,7 +39,6 @@ public class DictionaryController {
         return "redirect:/";
     }
 
-    // Edit page
     @GetMapping("/dictionary/edit/{id}")
     public String editPage(@PathVariable Long id, Model model) {
         Dictionary dictionary = dictionaryService.getById(id);
@@ -55,7 +52,6 @@ public class DictionaryController {
         return "redirect:/";
     }
 
-    // Delete
     @GetMapping("/dictionary/delete/{id}")
     public String delete(@PathVariable Long id) {
         dictionaryService.delete(id);
